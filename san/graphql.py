@@ -3,6 +3,10 @@ from san.api_config import ApiConfig
 from san.env_vars import SANBASE_GQL_HOST
 from san.error import SanError
 
+requests.adapters.DEFAULT_RETRIES = 5
+
+TIMEOUT = 60 * 2
+
 
 def execute_gql(gql_query_str):
     headers = {}
@@ -12,7 +16,8 @@ def execute_gql(gql_query_str):
     response = requests.post(
         SANBASE_GQL_HOST,
         json={'query': gql_query_str},
-        headers=headers)
+        headers=headers,
+        timeout=TIMEOUT)
 
     if response.status_code == 200:
         return __handle_success_response__(response, gql_query_str)
