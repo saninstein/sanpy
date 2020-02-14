@@ -5,7 +5,7 @@ from san.error import SanError
 
 requests.adapters.DEFAULT_RETRIES = 5
 
-TIMEOUT = 60 * 2
+TIMEOUT = 60 * 5
 
 
 def execute_gql(gql_query_str):
